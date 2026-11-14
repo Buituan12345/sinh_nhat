@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffe4ee">
+<title>Happy Birthday, Bé Yêu ❤️</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="fireworks"></canvas>
+<nav><a href="#home">Trang chủ</a><a href="#count">Đếm ngược</a><a href="#memories">Kỷ niệm</a><a href="#letter">Lời yêu thương</a><a href="#cake">Thổi nến</a></nav>
+<header class="hero" id="home">
+ <span class="float f1">💗</span><span class="float f2">🌷</span><span class="float f3">✨</span><span class="float f4">💞</span>
+ <div class="hero-card"><div class="kicker">A little surprise made with love</div><h1 class="script">Happy Birthday<br>Bé Yêu!</h1>
+ <p>Gửi <b>Lê Thị Mỹ Duyên</b> — cô gái đặc biệt nhất trong trái tim anh.<br>Hôm nay và mọi ngày, mong em luôn được yêu thương và mỉm cười thật nhiều.</p>
+ <a class="btn" href="#count" style="display:inline-block;text-decoration:none">Mở món quà của anh 💝</a>
+ </div>
+</header>
+<section id="count"><div class="section-title"><div class="kicker">The day is coming</div><h2 class="script">Đếm ngược đến ngày của em</h2><p>Một ngày thật đặc biệt đang đến gần…</p></div>
+ <div class="count-wrap"><div class="countdown"><div class="timebox"><strong id="days">--</strong><span>NGÀY</span></div><div class="timebox"><strong id="hours">--</strong><span>GIỜ</span></div><div class="timebox"><strong id="minutes">--</strong><span>PHÚT</span></div><div class="timebox"><strong id="seconds">--</strong><span>GIÂY</span></div></div><p id="count-message">Anh đang đếm từng khoảnh khắc để chúc mừng em ❤️</p></div>
+</section>
+<section id="memories"><div class="section-title"><div class="kicker">Our little moments</div><h2 class="script">Góc nhỏ kỷ niệm</h2><p>Mỗi bức ảnh là một khoảnh khắc anh muốn giữ thật lâu.</p></div>
+ <div class="memory-folders" id="memoryFolders">
+  <button class="memory-folder" type="button" data-album="0"><span class="folder-art">🌷</span><span class="folder-title">Khoảnh khắc đáng yêu</span><span class="folder-count" id="albumCount0">0 mục</span></button>
+  <button class="memory-folder" type="button" data-album="1"><span class="folder-art">💗</span><span class="folder-title">Những ngày nhiều tiếng cười</span><span class="folder-count" id="albumCount1">0 mục</span></button>
+  <button class="memory-folder" type="button" data-album="2"><span class="folder-art">🦋</span><span class="folder-title">Những chuyến đi</span><span class="folder-count" id="albumCount2">0 mục</span></button>
+  <button class="memory-folder" type="button" data-album="3"><span class="folder-art">💕</span><span class="folder-title">Dành riêng cho em</span><span class="folder-count" id="albumCount3">0 mục</span></button>
+ </div>
+ <p class="album-hint">Chọn một album để mở cuốn sách kỷ niệm của chúng mình ✨</p>
+ <div class="album-overlay" id="albumOverlay" aria-hidden="true">
+  <div class="album-shell" role="dialog" aria-modal="true" aria-labelledby="albumTitle">
+   <button class="album-close" id="albumClose" type="button" aria-label="Đóng album">×</button>
+   <div class="album-topline">OUR LITTLE MEMORIES</div>
+   <h3 class="album-heading" id="albumTitle">Khoảnh khắc đáng yêu</h3>
+   <div class="album-book" id="albumBook">
+    <div class="album-page album-left"><div class="page-flower">✿</div><div class="page-quote">Every picture tells<br>a little love story</div><div class="page-heart">♡</div></div>
+    <div class="album-page album-right">
+     <div class="album-photo-grid" id="albumPhotoGrid"></div>
+     <div class="album-empty" id="albumEmpty">Album đang chờ những bức ảnh thật xinh của chúng mình 🌸</div>
+    </div>
+   </div>
+   <div class="album-controls"><button class="album-nav" id="albumPrev" type="button">‹ Trang trước</button><span id="albumPageNumber">Trang 1 / 1</span><button class="album-nav" id="albumNext" type="button">Trang sau ›</button></div>
+  </div>
+ </div>
+</section>
+<section id="letter"><div class="section-title"><div class="kicker">A letter for you</div><h2 class="script">Bức thư bí mật</h2><p>Chạm vào chiếc phong thư để đọc nhé, Bé Yêu.</p></div>
+ <div class="letter-area"><div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Mở thư"><div class="seal">❤️</div></div>
+ <article class="letter" id="letterText"><div class="script" style="font-size:2.6rem">Gửi Bé Yêu của anh,</div>
+Chúc mừng sinh nhật vợ yêu của anh! ❤️
+
+Chúc em sang tuổi mới ngày càng xinh đẹp, luôn vui vẻ, bình an và không còn cảm thấy buồn hay cô đơn nữa nhé. Dù hôm nay hay những ngày bình thường, anh mong em luôn nhớ rằng em được yêu thương và luôn có anh ở bên.
+
+Cảm ơn em vì đã xuất hiện và làm cho cuộc sống của anh trở nên dịu dàng hơn. Mong rằng chúng mình sẽ cùng nhau đi qua thật nhiều sinh nhật, cùng tạo thêm thật nhiều kỷ niệm đẹp.
+
+Mãi mãi yêu em. ❤️
+
+<div class="script" style="font-size:2.4rem;text-align:right">Anh của em 💗</div></article></div>
+</section>
+<section id="cake"><div class="section-title"><div class="kicker">Make a wish</div><h2 class="script">Thổi nến sinh nhật</h2><p>Ước một điều thật đẹp rồi nhấn nút bên dưới nhé!</p></div>
+ <div class="cake-area"><div class="cake"><div class="flame" id="flame"></div><div class="candle"></div><div class="layer"></div></div><button class="btn" id="blow">Thổi nến ✨</button><button class="btn secondary" id="relight" style="margin-left:8px">Thắp nến lại</button><p id="wish" style="font-weight:800;color:#c94f7e;margin-top:20px">Điều ước của em nhất định sẽ thành hiện thực! 💕</p></div>
+</section>
+<footer>Made with all my love for <b>Mỹ Duyên</b> · 26.11.2026 💗</footer>
+<button class="music-control" id="music" title="Bật / tắt nhạc">♫</button>
+<input type="file" id="audioFile" accept="audio/*" hidden>
+<audio id="audio" loop></audio>
+<!-- DANH SÁCH ẢNH VÀ VIDEO ALBUM: thêm đường dẫn vào photos của album tương ứng.
+     Ảnh: "images/anh1.jpg"
+     Video: "videos/video1.mp4" (hoặc {"type":"video", "src":"videos/video1.mp4"})
+     Đặt ảnh trong thư mục images, video trong thư mục videos cạnh index.html.
+     Định dạng video khuyên dùng: MP4 (H.264). -->
+<script type="application/json" id="album-data">
+[
+  {"name":"Khoảnh khắc đáng yêu","photos":[]},
+  {"name":"Những ngày nhiều tiếng cười","photos":[]},
+  {"name":"Những chuyến đi","photos":[]},
+  {"name":"Dành riêng cho em","photos":[]}
+]
+</script>
+<script src="script.js" defer></script>
+</body></html>
