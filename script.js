@@ -42,6 +42,49 @@ const albumGrid=document.getElementById('albumPhotoGrid');
 const albumEmpty=document.getElementById('albumEmpty');
 const albumPhotosPerPage=4;
 
+// Lightbox: nhấn vào ảnh trong album để xem ảnh lớn, nhấn nền hoặc Escape để đóng.
+const photoLightbox=document.createElement('div');
+photoLightbox.className='photo-lightbox';
+photoLightbox.id='photoLightbox';
+photoLightbox.setAttribute('role','dialog');
+photoLightbox.setAttribute('aria-modal','true');
+photoLightbox.setAttribute('aria-label','Xem ảnh phóng to');
+photoLightbox.innerHTML='<button class="photo-lightbox-close" type="button" aria-label="Đóng">×</button><img class="photo-lightbox-image" alt="Ảnh kỷ niệm phóng to"><video class="photo-lightbox-video" controls playsinline preload="metadata"></video><div class="photo-lightbox-caption"></div>';
+document.body.appendChild(photoLightbox);
+const photoLightboxImage=photoLightbox.querySelector('.photo-lightbox-image');
+const photoLightboxVideo=photoLightbox.querySelector('.photo-lightbox-video');
+const photoLightboxCaption=photoLightbox.querySelector('.photo-lightbox-caption');
+function openPhotoLightbox(src,alt){
+ photoLightboxImage.src=src;
+ photoLightboxImage.alt=alt||'Ảnh kỷ niệm';
+ photoLightboxCaption.textContent=alt||'';
+ photoLightbox.classList.add('open');
+ document.body.style.overflow='hidden';
+}
+function openVideoLightbox(src,caption){
+ photoLightboxImage.style.display='none';
+ photoLightboxVideo.style.display='block';
+ photoLightboxVideo.src=src;
+ photoLightboxVideo.currentTime=0;
+ photoLightboxCaption.textContent=caption||'Video kỷ niệm';
+ photoLightbox.classList.add('open');
+ document.body.style.overflow='hidden';
+ const playAttempt=photoLightboxVideo.play();
+ if(playAttempt&&typeof playAttempt.catch==='function')playAttempt.catch(()=>{});
+}
+function closePhotoLightbox(){
+ photoLightbox.classList.remove('open');
+ photoLightboxImage.removeAttribute('src');
+ photoLightboxVideo.pause();
+ photoLightboxVideo.removeAttribute('src');
+ photoLightboxVideo.load();
+ photoLightboxVideo.style.display='none';
+ photoLightboxImage.style.display='block';
+ if(!albumOverlay.classList.contains('open'))document.body.style.overflow='';
+}
+photoLightbox.querySelector('.photo-lightbox-close').addEventListener('click',closePhotoLightbox);
+photoLightbox.addEventListener('click',event=>{if(event.target===photoLightbox)closePhotoLightbox();});
+
 function updateAlbumCounts(){
  loveAlbums.forEach((album,index)=>{
   const countNode=document.getElementById('albumCount'+index);
@@ -74,9 +117,16 @@ function renderLoveAlbum(){
    video.setAttribute('aria-label',(typeof photo==='object'&&photo.alt)?photo.alt:'Video kỷ niệm của hai người');
    video.onerror=()=>{frame.classList.add('image-missing');video.title='Không tìm thấy video: '+mediaPath;};
    frame.appendChild(video);
+   const expandVideo=document.createElement('button');
+   expandVideo.type='button';expandVideo.className='video-expand';expandVideo.textContent='⛶';
+   expandVideo.setAttribute('aria-label','Phóng to video');expandVideo.title='Xem video phóng to';
+   expandVideo.addEventListener('click',event=>{event.stopPropagation();openVideoLightbox(mediaPath,video.getAttribute('aria-label'));});
+   frame.appendChild(expandVideo);
   }else{
    const img=document.createElement('img');img.src=mediaPath;img.alt=(typeof photo==='object'&&photo.alt)?photo.alt:'Kỷ niệm của hai người';
    img.loading='lazy';
+   img.title='Nhấn để phóng to ảnh';
+   img.addEventListener('click',()=>openPhotoLightbox(img.currentSrc||img.src,img.alt));
    img.onerror=()=>{frame.classList.add('image-missing');img.alt='Không tìm thấy ảnh: '+mediaPath;};
    frame.appendChild(img);
   }
@@ -109,5 +159,8 @@ document.getElementById('albumClose').addEventListener('click',closeLoveAlbum);
 albumOverlay.addEventListener('click',event=>{if(event.target===albumOverlay)closeLoveAlbum();});
 document.getElementById('albumPrev').addEventListener('click',()=>changeAlbumPage(-1));
 document.getElementById('albumNext').addEventListener('click',()=>changeAlbumPage(1));
-document.addEventListener('keydown',event=>{if(event.key==='Escape'&&albumOverlay.classList.contains('open'))closeLoveAlbum();});
+document.addEventListener('keydown',event=>{
+ if(event.key==='Escape'&&photoLightbox.classList.contains('open'))closePhotoLightbox();
+ else if(event.key==='Escape'&&albumOverlay.classList.contains('open'))closeLoveAlbum();
+});
 updateAlbumCounts();

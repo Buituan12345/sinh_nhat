@@ -52,6 +52,8 @@ footer{text-align:center;padding:40px 20px;color:#b17a90}.heart{position:fixed;b
 .album-polaroid:hover{transform:rotate(0) scale(1.03);z-index:2}
 .album-polaroid img,.album-polaroid video{display:block;width:100%;height:125px;object-fit:cover;background:#fff0f5;border:0}
 .album-polaroid video{object-fit:contain;background:#24151d}
+.video-expand{position:absolute;right:10px;top:10px;width:32px;height:32px;border:0;border-radius:50%;background:rgba(255,255,255,.94);color:#a83f69;font-size:22px;line-height:1;box-shadow:0 2px 8px #0003;cursor:pointer;z-index:3}
+.video-expand:hover{transform:scale(1.08);background:#fff}
 .album-delete{position:absolute;right:3px;top:3px;width:25px;height:25px;border:0;border-radius:50%;background:#e75480;color:white;font-size:18px;line-height:1;cursor:pointer}
 .album-empty{padding:70px 12px;color:#bb879a;font:italic 16px/1.8 Georgia,serif}
 .album-controls{display:flex;justify-content:center;align-items:center;gap:18px;margin:16px auto;color:#a87589;font-size:13px}
@@ -60,3 +62,14 @@ footer{text-align:center;padding:40px 20px;color:#b17a90}.heart{position:fixed;b
 .album-actions{margin-top:10px}
 @media(max-width:760px){.memory-folders{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.memory-folder{padding:17px 8px}.album-shell{padding:22px 10px}.album-book{min-height:270px}.album-right{padding:9px}.album-photo-grid{gap:7px}.album-polaroid{padding:5px 5px 15px}.album-polaroid img,.album-polaroid video{height:95px}.album-controls{gap:7px}.album-nav{padding:8px 9px;font-size:12px}.page-quote{font-size:14px}}
 @media(max-width:420px){.album-book{min-height:240px}.album-polaroid img,.album-polaroid video{height:78px}.album-empty{padding-top:48px;font-size:14px}}
+
+/* ===== PHONG TO ANH KHI NHAN (LIGHTBOX) ===== */
+.album-polaroid img{cursor:zoom-in}
+.photo-lightbox{display:none;position:fixed;inset:0;z-index:200;background:rgba(28,12,21,.92);align-items:center;justify-content:center;padding:64px 22px 28px;backdrop-filter:blur(7px)}
+.photo-lightbox.open{display:flex}
+.photo-lightbox-image{display:block;max-width:min(94vw,1400px);max-height:86vh;width:auto;height:auto;object-fit:contain;border:7px solid #fff;border-radius:9px;box-shadow:0 22px 80px #0008;animation:photoZoomIn .22s ease-out}
+.photo-lightbox-video{display:none;max-width:min(94vw,1400px);max-height:86vh;width:auto;height:auto;object-fit:contain;background:#000;border:7px solid #fff;border-radius:9px;box-shadow:0 22px 80px #0008;animation:photoZoomIn .22s ease-out}
+.photo-lightbox-close{position:absolute;top:16px;right:20px;width:48px;height:48px;border-radius:50%;background:#fff0f5;color:#a83f69;font-size:34px;line-height:1;box-shadow:0 4px 18px #0004}
+.photo-lightbox-caption{position:absolute;left:15px;right:15px;bottom:17px;text-align:center;color:#fff;font-size:14px;text-shadow:0 2px 8px #000;pointer-events:none}
+@keyframes photoZoomIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+@media(max-width:600px){.photo-lightbox{padding:62px 10px 45px}.photo-lightbox-image{max-width:96vw;max-height:82vh;border-width:4px}.photo-lightbox-video{max-width:96vw;max-height:82vh;border-width:4px}.photo-lightbox-close{top:10px;right:10px;width:42px;height:42px}}
